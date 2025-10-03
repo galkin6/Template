@@ -1,0 +1,73 @@
+@use 'functions' as *;
+
+// Создаем переменные с шириной медиазапроса
+$laptop: 1440.98;
+$tablet: 1023.98;
+$mobile: 767.98;
+$mobile-s: 480.98;
+
+// Создаем миксин
+
+// Все что больше 1440px
+@mixin laptop-above {
+    @media (width > rem($laptop)) {
+        @content;
+    }
+}
+
+// Все что до 1440.98px
+@mixin laptop {
+    @media (width <=rem($laptop)) {
+        @content;
+    }
+}
+
+// Все что больше 1023.98px
+@mixin tablet-above {
+    @media(width > rem($tablet)) {
+        @content;
+    }
+}
+
+// Все что до 1023.98px
+@mixin tablet {
+    @media(width <=rem($tablet)) {
+        @content;
+    }
+}
+
+// Все что больше 767.98px
+@mixin mobile-above {
+    @media(width > rem($mobile)) {
+        @content;
+    }
+}
+
+// Все что до 767.98px
+@mixin mobile {
+    @media (width <=rem($mobile)) {
+        @content;
+    }
+}
+
+// Все что больше 480.98px
+@mixin mobile-s-above {
+    @media (width > rem($mobile-s)) {
+        @content;
+    }
+}
+
+// Все что до 480.98px
+@mixin mobile-s {
+    @media (width <=rem($mobile-s)) {
+        @content;
+    }
+}
+
+@mixin hover($hasActiveEffectOnMobile: true) {
+    @media (any-hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+}

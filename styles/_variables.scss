@@ -1,0 +1,13 @@
+@use 'helpers' as *;
+
+$color-dark: #000000;
+$color-light: #FFFFFF;
+$color-dark-grey: #131619;
+$color-light-grey: #C4C4C4;
+$font-family: 'Heebo', sans-serif;
+$second-family: "Yantramanav", sans-serif;
+$third-family: "Roboto", sans-serif;
+$header-height: rem(90);
+$container-width: #{rem(1300)};
+$container-padding-x: #{rem(15)};
+$transition-duration: 0.2s;

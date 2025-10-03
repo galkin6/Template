@@ -1,0 +1,136 @@
+@use '../helpers' as*;
+@use '../variables' as*;
+
+.header {
+    @include flex-center;
+    justify-content: space-between;
+    column-gap: 20px;
+    background-color: $color-dark-grey;
+    padding-inline: rem(32);
+    padding-bottom: 0;
+    @include tablet {
+        flex-wrap: wrap;
+    }
+
+    @include mobile-s {
+        padding: 10px;
+        padding-bottom: 0;
+        column-gap: 10px;
+    }
+}
+
+.logo-img {
+    flex-shrink: 0;
+}
+
+.nav {
+    @include tablet {
+        order: 1;
+        flex-basis: 100%;
+    }
+
+    @include mobile-s {}
+}
+
+.nav__ul {
+    @include flex-center;
+    justify-content: space-between;
+    column-gap: 50px;
+    flex-wrap: wrap;
+
+    @include mobile-s {
+        column-gap: 10px;
+    }
+}
+
+.nav__link {
+    display: inline-flex;
+    align-items: center;
+    height: rem(90);
+    font-weight: 700;
+    font-size: rem(12);
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: $transition-duration;
+    column-gap: rem(7);
+
+    &:hover {
+        color: $color-light-grey;
+    }
+
+    @include tablet {
+        height: rem(50);
+    }
+}
+
+.nav__link.is-active::after {
+    content: '';
+    display: inline-block;
+    @include square(5px);
+    border-radius: 50%;
+    background-color: currentColor;
+    vertical-align: middle;
+}
+
+.visually-hidden {
+    @include visually-hidden;
+}
+
+.header__button {
+    @include flex-center;
+    justify-content: space-between;
+    column-gap: rem(39);
+
+    @include mobile-s {
+        column-gap: rem(7);
+    }
+}
+
+.button {
+    display: inline-flex;
+    width: 124px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 7px;
+    font-family: $font-family;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border: none;
+    border-radius: 30px;
+    background-color: $color-light;
+
+    &:hover {
+        background-color: $color-light-grey;
+    }
+}
+
+.mobile-button {
+    display: inline-flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 5px;
+    @include square(40px);
+    border-radius: 50%;
+    padding: 0 9px;
+    background-color: transparent;
+    border: 1px solid $color-light;
+    color: $color-light;
+
+    &:hover {
+        color: $color-light-grey;
+        border-color: currentColor;
+    }
+}
+
+.mobile-button-content {
+    width: 6px;
+    height: 1px;
+    background-color: currentColor;
+    box-shadow: 15px 0 0 currentColor;
+}

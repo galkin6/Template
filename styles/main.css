@@ -1,0 +1,484 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  border: none;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure, fieldset):where([class]) {
+  margin: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Плавный скролл
+   */
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
+ */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill=none],
+[fill^=url])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none],
+[stroke^=url])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+a {
+  text-decoration: none;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "Heebo";
+  src: url(../fonts/Heebo-Light.woff2);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Heebo-Light";
+  src: url(../fonts/Heebo-Light.woff2);
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Heebo-Bold";
+  src: url(../fonts/Heebo-Bold.woff2);
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url(../fonts/Roboto-Regular.woff2);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url(../fonts/Roboto-Medium.woff2);
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+.container {
+  max-width: calc(81.25rem + (0.9375rem) * 2);
+  margin-inline: auto;
+  padding-inline: 0.9375rem;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Heebo", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: #C4C4C4;
+  background: #000;
+  line-height: 1;
+}
+
+a,
+button,
+input,
+svg * {
+  transition: 0.2s;
+}
+
+a {
+  color: #FFFFFF;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 20px;
+  background-color: #131619;
+  padding-inline: 2rem;
+  padding-bottom: 0;
+}
+@media (width <= 63.99875rem) {
+  .header {
+    flex-wrap: wrap;
+  }
+}
+@media (width <= 30.06125rem) {
+  .header {
+    padding: 10px;
+    padding-bottom: 0;
+    column-gap: 10px;
+  }
+}
+
+.logo-img {
+  flex-shrink: 0;
+}
+
+@media (width <= 63.99875rem) {
+  .nav {
+    order: 1;
+    flex-basis: 100%;
+  }
+}
+.nav__ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+@media (width <= 30.06125rem) {
+  .nav__ul {
+    column-gap: 10px;
+  }
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  height: 5.625rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: 0.2s;
+  column-gap: 0.4375rem;
+}
+.nav__link:hover {
+  color: #C4C4C4;
+}
+@media (width <= 63.99875rem) {
+  .nav__link {
+    height: 3.125rem;
+  }
+}
+
+.nav__link.is-active::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+  vertical-align: middle;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+.header__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 2.4375rem;
+}
+@media (width <= 30.06125rem) {
+  .header__button {
+    column-gap: 0.4375rem;
+  }
+}
+
+.button {
+  display: inline-flex;
+  width: 124px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 7px;
+  font-family: "Heebo", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: none;
+  border-radius: 30px;
+  background-color: #FFFFFF;
+}
+.button:hover {
+  background-color: #C4C4C4;
+}
+
+.mobile-button {
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0 9px;
+  background-color: transparent;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+}
+.mobile-button:hover {
+  color: #C4C4C4;
+  border-color: currentColor;
+}
+
+.mobile-button-content {
+  width: 6px;
+  height: 1px;
+  background-color: currentColor;
+  box-shadow: 15px 0 0 currentColor;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  min-height: calc(100vh - 90px);
+  padding-inline: 30px;
+  background-color: #131619;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  padding-inline: 2rem;
+  padding-bottom: 37px;
+}
+@media (width <= 30.06125rem) {
+  .banner {
+    padding-inline: 10px;
+    align-items: center;
+  }
+}
+
+.banner__info {
+  display: flex;
+  align-items: end;
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: clamp(1rem, 0.7980769231rem + 0.8974358974vw, 1.875rem);
+}
+.banner__info::before {
+  content: "";
+  width: clamp(60px, 10.1vw, 194px);
+  aspect-ratio: 1;
+  background: url(../../icons/arrow.svg) center/contain no-repeat;
+  margin-right: 30px;
+}
+@media (width <= 30.06125rem) {
+  .banner__info::before {
+    margin-right: 20px;
+  }
+}
+
+.banner__title {
+  font-size: clamp(3.75rem, -0.5769230769rem + 19.2307692308vw, 22.5rem);
+  line-height: 1.1;
+}
+
+.banner__pagination-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner__pagination-item {
+  display: flex;
+}
+
+.event_pagination-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  padding: 7px;
+}
+.event_pagination-btn:not(.is-current):hover::after {
+  background-color: #C4C4C4;
+}
+.event_pagination-btn::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #FFFFFF;
+  transition: 0.2s;
+}
+
+.event_pagination-btn.is-current::after {
+  background-color: #FFFFFF;
+}
+
+/*# sourceMappingURL=main.css.map */

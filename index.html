@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>CROSSFIT | Home</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <!-- type="module" нужен для того чтобы можно блыо импортировать сюда другие js файлы; defer нужен для того чтобы скрипт запускался после того как прогрузится DOM гарантия что элементы создались-->
+    <script src="./scripts/main.js" type="module" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <a href="/" class="logo-link"><img src="./images/logo.png" alt="Logo"
+          class="logo-img" width="135" height="25" loading="lazy"></a>
+      <nav class="nav">
+        <ul class="nav__ul">
+          <li class="nav__li"><a href="#"
+              class="nav__link is-active">HOME</a></li>
+          <li class="nav__li"><a href="#" class="nav__link">PAGES</a></li>
+          <li class="nav__li"><a href="#" class="nav__link">PORTFOLIO</a></li>
+          <li class="nav__li"><a href="#" class="nav__link">BLOG</a></li>
+          <li class="nav__li"><a href="#" class="nav__link">SHOP</a></li>
+        </ul>
+      </nav>
+      <div class="header__button">
+        <button class="button">BOOK NOW</button>
+        <button title="Open menu" class="mobile-button">
+          <span class="visually-hidden">Open Menu</span>
+          <span class="mobile-button-content"></span>
+          <span class="mobile-button-content"></span>
+          <span class="mobile-button-content"></span>
+        </button>
+      </div>
+    </header>
+    <main class="main">
+      <section class="banner">
+        <h2 class="visually-hidden">Upcoming event</h2>
+        <div class="banner__body">
+          <div class="banner__info">
+            NEW EVENT </br>
+            COMMING UP / <time datetime="06-07">JUNE 7</time>&nbsp;-&nbsp;<time datetime="06-13">13</time>
+          </div>
+          <h3 class="banner__title">CROSSFIT</h3>
+        </div>
+        <ul class="banner__pagination-list">
+          <li class="banner__pagination-item"><button type="button" class="event_pagination-btn is-current"></button></li>
+          <li class="banner__pagination-item"><button type="button" class="event_pagination-btn"></button></li>
+          <li class="banner__pagination-item"><button type="button" class="event_pagination-btn"></button></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
